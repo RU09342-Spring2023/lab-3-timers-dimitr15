@@ -80,17 +80,17 @@ __interrupt void Port_2(void)
 {
     P2IFG &= ~BIT3;                         // Clear P1.3 IFG
 
-    if (P2IES &= ~BIT3)
+    if (P2IES &= BIT3)
     {
         LED_Color = 0;
-        P6OUT &= ~BIT6;
+        P2IES ^= BIT3;
         // Set the edge sensitivity to falling
     }
 
     else
     {
         LED_Color = 1;
-        P1OUT &= ~BIT0;
+        P2IES ^= BIT3;
         // Set the edge sensitivity to rising
     }
 }
